@@ -20,6 +20,20 @@ def index():
     """
     return render_template('index.html', **make_context())
 
+@app.route('/msg-1.html')
+def msg_1():
+    """
+    First message
+    """
+    return render_template('msg-1.html', **make_context())
+
+@app.route('/msg-2.html')
+def msg_2():
+    """
+    Second message
+    """
+    return render_template('msg-2.html', **make_context())
+
 @app.route('/widget.html')
 def widget():
     """

@@ -1,0 +1,47 @@
+{% extends '_base.html' %}
+
+{% block extra_css %}
+{{ CSS.push('less/breaking-news.less') }}
+{% endblock extra_css %}
+
+
+{% block header_content %}
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>Boston Marathon Explosions</h1>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+
+{% block wide_content %}
+<div class="row breaking-news">
+    <div class="span6">
+    
+        <h3>What We Know</h3>
+        
+        {% block what_we_know %}
+        {% endblock %}
+    </div>
+    
+    <div class="span3">
+        <h3>What We're Trying To Confirm</h3>
+
+        {% block what_we_dont_know %}
+        {% endblock %}
+    </div>
+
+    <div class="span3">
+        <h3>What We've Ruled Out</h3>
+
+        {% block what_is_false %}
+        {% endblock %}
+    </div>
+        
+</div>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+{% endblock %}
