@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="span12">
-                <h1>{{ COPY.content.header_title }}</h1>
+                <h1>Boston Marathon Explosions</h1>
                 <h2>{{ COPY.content.lorem_ipsum }}</h2>
             </div>
         </div>
@@ -14,32 +14,56 @@
 {% endblock %}
 
 
-{% block content %}
-<h1>{{ PROJECT_NAME }}</h1>
-<div id="story-meta">
-    <p class="byline">by <span>{{ COPY.attribution.byline }}</span></p>
-    <p class="dateblock">
-        <span class="date">{{ COPY.attribution.pubdate }}</span>
-        <span class="time"> {{ COPY.attribution.pubtime }}</span>
-    </p>
-</div>
-
-<h2>Example COPY list</h2>
-<dl>
-    {% for row in COPY.example_list %}
-    <dt>{{ row.term }}</dt><dd>{{ row.definition }}</dd>
-    {% endfor %}
-</dl>
-
-<p id="template-example"></p>
-{% endblock %}
-
-
 {% block wide_content %}
 <div class="row">
-    <div class="span12">
-        <h2>{{ COPY.content.footer_title }}</h2>
-        <p>{{ COPY.content.lorem_ipsum }}</p>
+    <div class="span6">
+    
+        <h3>What Know</h3>
+        <h5>Updated at 10:53 a.m.</h5>
+        <ul>
+            <li>
+                Two explosions at finish line of boston marathon
+            </li>
+            <li>
+                FBI counterterrorism officials on scene
+            </li>
+            <li>
+                President has been notified and has pledged assistance to state and local authorities.
+            </li>
+            <li>
+                2 dead and 23 injured
+                
+                <blockquote class="twitter-tweet"><p>Update 23 injuries2 dead <a href="https://twitter.com/search/%23tweetfromthebeat">#tweetfromthebeat</a> via @<a href="https://twitter.com/cherylfiandaca">cherylfiandaca</a></p>&mdash; Boston Police Dept. (@Boston_Police) <a href="https://twitter.com/Boston_Police/status/323890086792019968">April 15, 2013</a></blockquote
+                
+                <span class="meta">
+                    <ul>
+                        <li class="source">Boston Police Department verified Twitter account - <span class="date">4:06 p.m.</span></li>
+                    </ul>
+                </span>
+            </li>
+            <li>
+                Huge problem looking for other potential bombs because so many bags left at roadside when people ran away & because so many cars parked in the area.
+                
+                <span class="meta">
+                    <ul>
+                        <li class="reporter">Confirmed by Dina</li>
+                    </ul>
+                </span>
+            </li>
+        </ul>
     </div>
+    
+    <div class="span3">
+        <h3>What We're Looking Into</h3>
+        <h5>Updated at 10:53 a.m.</h5>
+    </div>
+
+    <div class="span3">
+        <h3>What We've Ruled Out</h3>
+        <h5>Updated at 10:53 a.m.</h5>
+    </div>
+        
+        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 </div>
 {% endblock %}
