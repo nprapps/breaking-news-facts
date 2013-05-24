@@ -34,6 +34,27 @@ def msg_2():
     """
     return render_template('msg-2.html', **make_context())
 
+@app.route('/msg-3.html')
+def msg_3():
+    """
+    Third message
+    """
+    return render_template('msg-3.html', **make_context())
+
+@app.route('/msg-4.html')
+def msg_4():
+    """
+    Fourth message
+    """
+    return render_template('msg-4.html', **make_context())
+
+@app.route('/msg-5.html')
+def msg_5():
+    """
+    Fifth message
+    """
+    return render_template('msg-5.html', **make_context())
+
 @app.route('/widget.html')
 def widget():
     """

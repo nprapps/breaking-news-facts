@@ -1,8 +1,17 @@
 .breaking-news {
+    padding-bottom: 33px; 
+
     h3 {
         font-size: 18px;
         margin-bottom: 11px;
         color: #666;
+    }
+    h4 {
+        margin: 0 0 6px 0;
+        color: #666;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: bold;
     }
     h5 {
         margin-bottom: 22px;
@@ -13,27 +22,40 @@
         padding: 0;
         list-style: none;
         
-        &.meta {
+        &.meta { margin-top: 6px; }
+    }
+    li {
+        &.revisions {
             margin-top: 11px;
         }
     }
-    li {
-        
-    }
     
     ul.news-items > li {
-        padding: 22px;
-        border-bottom: 2px solid #eee;
+        padding: 11px;
+        border-bottom: 2px solid #fff;
         font-size: 14px;
         color: #121212;
+        background-color: #f1f1f1;
 
         &.new { 
-            background-color: #F7E39B;
+            background-color: #FBF1CD;
+            
+            h4 { color: #B39429; }
+        }
+        &.updated { 
+            background-color: #F7E5E2;
+            
+            h4 { color: #D8472B; }
         }
     }
     
     ul.meta > li {
         font-size: 12px;
         color: #666;
+    }
+    
+    ul.revisions > li {
+        list-style-type: square;
+        margin-left: 1.2em;
     }
 }
