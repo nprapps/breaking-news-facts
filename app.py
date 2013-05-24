@@ -54,6 +54,14 @@ def msg_7():
 def msg_8():
     return render_template('msg-8.html', **make_context())
 
+@app.route('/msg-9.html')
+def msg_9():
+    return render_template('msg-9.html', **make_context())
+
+@app.route('/msg-10.html')
+def msg_10():
+    return render_template('msg-10.html', **make_context())
+
 @app.route('/widget.html')
 def widget():
     """
