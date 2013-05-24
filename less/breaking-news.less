@@ -24,10 +24,14 @@
     }
     h4 {
         margin: 0 0 6px 0;
-        color: #666;
-        font-size: 12px;
+        background-color: #666;
+        color: #fff;
+        font-size: 10px;
         text-transform: uppercase;
         font-weight: bold;
+        display: inline-block;
+        line-height: 15px;
+        padding: 0 6px;
     }
     h5 {
         margin-bottom: 22px;
@@ -39,10 +43,30 @@
         list-style: none;
         
         &.meta { margin-top: 6px; }
+        &.revisions { 
+            margin-top: 6px;
+            display: none;
+        }
     }
     li {
         &.revisions {
             margin-top: 11px;
+            
+            strong {
+                color: #999;
+                font-size: 11px;
+                font-weight: normal;
+                background-color: #bababa;
+                color: #fff;
+                line-height: 15px;
+                padding: 0 6px;
+                display: inline-block;
+                
+                &:hover {
+                    opacity: .7;
+                    cursor: pointer;
+                }
+            }
         }
     }
     
@@ -56,12 +80,12 @@
         &.new { 
             background-color: #FBF1CD;
             
-            h4 { color: #B39429; }
+            h4 { background-color: #B39429; }
         }
         &.updated { 
             background-color: #F7E5E2;
             
-            h4 { color: #D8472B; }
+            h4 { background-color: #D8472B; }
         }
     }
     

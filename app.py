@@ -21,40 +21,38 @@ def index():
     """
     return render_template('index.html', **make_context())
 
+# Boston Marathon pages
 @app.route('/msg-1.html')
 def msg_1():
-    """
-    First message
-    """
     return render_template('msg-1.html', **make_context())
 
 @app.route('/msg-2.html')
 def msg_2():
-    """
-    Second message
-    """
     return render_template('msg-2.html', **make_context())
 
 @app.route('/msg-3.html')
 def msg_3():
-    """
-    Third message
-    """
     return render_template('msg-3.html', **make_context())
 
 @app.route('/msg-4.html')
 def msg_4():
-    """
-    Fourth message
-    """
     return render_template('msg-4.html', **make_context())
 
 @app.route('/msg-5.html')
 def msg_5():
-    """
-    Fifth message
-    """
     return render_template('msg-5.html', **make_context())
+
+@app.route('/msg-6.html')
+def msg_6():
+    return render_template('msg-6.html', **make_context())
+
+@app.route('/msg-7.html')
+def msg_7():
+    return render_template('msg-7.html', **make_context())
+
+@app.route('/msg-8.html')
+def msg_8():
+    return render_template('msg-8.html', **make_context())
 
 @app.route('/widget.html')
 def widget():
