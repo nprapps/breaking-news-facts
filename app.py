@@ -14,6 +14,7 @@ app = Flask(app_config.PROJECT_NAME)
 
 # Example application views
 @app.route('/')
+@app.route('/index.html')
 def index():
     """
     Example view demonstrating rendering a simple HTML page.
