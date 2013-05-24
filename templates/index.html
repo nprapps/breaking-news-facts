@@ -1,5 +1,10 @@
 {% extends '_base.html' %}
 
+{% block extra_css %}
+{{ CSS.push('less/breaking-news.less') }}
+{% endblock extra_css %}
+
+
 {% block header_content %}
 <header>
     <div class="container">
@@ -15,20 +20,20 @@
 
 
 {% block wide_content %}
-<div class="row">
-    <div class="span8">
+<div class="row breaking-overview">
+    <div class="span6">
         <h3>About This Project</h3>
         <p>The epistemology of breaking news: We're looking to put together a single digital source of truth for "what we know to be true" during breaking news events. What do we know? And why do we know what we know? We'll focus on attribution, transparency, aggregation and fact-checking. We aim to deliver a usable prototype.</p>
-        <p>Aside: Did you know that the Makah people of the Pacific Northwest have evidence built in to their verb tenses? http://en.wikipedia.org/wiki/Makah_language#Morphology You literally can't grammatically build a sentence without explaining how you know what you know.</p>
-        
-        <h3>Findings</h3>
-        <p><a href="https://docs.google.com/document/d/12tXv-kHxwf6bK5ZUGGQrMbWJff5xSYiLh3HORyf-K6c/edit">Interviews with Newsroom personnel who deal with breaking news</a> (Google Doc)</li>
+        <p>Aside: Did you know that the Makah people of the Pacific Northwest have evidence <a href="http://en.wikipedia.org/wiki/Makah_language#Morphology">built into their verb tenses</a>? You literally can't grammatically build a sentence without explaining how you know what you know.</p>
     </div>
-    
-    <div class="span4">
-        <h4>Case Study: Boston Marathon Bombings</h4>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    <div class="span3">
+        <h4>Case Study: Boston Marathon</h4>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</p>
         <p><a href="msg-1.html" class="btn btn-blue">Begin</a></p>
+    </div>
+    <div class="span3">
+        <h4>Findings</h4>
+        <p><a href="https://docs.google.com/document/d/12tXv-kHxwf6bK5ZUGGQrMbWJff5xSYiLh3HORyf-K6c/edit">Interviews with Newsroom personnel who deal with breaking news</a> (Google Doc)</li>
     </div>
 </div>
 {% endblock %}
