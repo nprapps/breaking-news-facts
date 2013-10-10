@@ -1,0 +1,3 @@
+{% for event in events %}
+    <a href="{{ event.get_admin_url() }}">{{ event.name }}</a>
+{% endfor %}

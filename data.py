@@ -33,7 +33,16 @@ def load_test_facts():
             row['statement'] = row['statement'].decode('utf-8')
             row['attribution'] = row['attribution'].decode('utf-8')
             row['related_facts'] = None
-            row['reporter'] = 'Rachel Lushinsky'
+
+            if row['public'] == '1':
+                row['public'] = True
+            else:
+                row['public'] = False
+
+            if row['approved'] == '1':
+                row['approved'] = True
+            else:
+                row['approved'] = False
 
             if models.Fact.select().where(models.Fact.statement == row['statement']).count() == 0:
                 m = models.Fact(**row)
