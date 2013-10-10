@@ -463,16 +463,12 @@ def cron_test():
     local('echo $DEPLOYMENT_TARGET > /tmp/cron_test.txt')
 
 
-def drop_tables():
-    models.delete_tables()
-
-
-def create_tables():
-    models.create_tables()
-
-
 def bootstrap():
-    data.delete_facts()
+    with settings(warn_only=True):
+        local('dropdb breaking')
+        local('createdb breaking')
+
+    models.create_tables()
     data.load_test_event()
     data.load_test_facts()
 
