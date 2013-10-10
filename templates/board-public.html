@@ -27,11 +27,13 @@
 {% endblock %}
 
 {% block wide_content %}
-<ul class="nav nav-pills visible-xs visible-sm" id="breaking-tabs">
-    <li class="known"><a href="#known">Confirmed</a></li>
-    <li class="unknown"><a href="#unknown">Investigating</a></li>
-    <li class="false"><a href="#false">Ruled Out</a></li>
-</ul>
+<div class="visible-xs visible-sm" id="breaking-tabs">
+    <ul>
+        <li class="known"><a href="#known">Confirmed</a></li>
+        <li class="unknown"><a href="#unknown">Maybe</a></li>
+        <li class="false"><a href="#false">False</a></li>
+    </ul>
+</div>
 
 <div class="row breaking-news">
     <div class="col-md-6 tab-pane" id="known">

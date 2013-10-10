@@ -20,8 +20,17 @@
 {% endblock %}
 
 {% block wide_content %}
+<div class="visible-xs visible-sm" id="breaking-tabs">
+    <ul>
+        <li class="known"><a href="#known">Confirmed</a></li>
+        <li class="unknown"><a href="#unknown">Chasing</a></li>
+        <li class="watching"><a href="#watching">Watching</a></li>
+        <li class="false"><a href="#false">False</a></li>
+    </ul>
+</div>
+
 <div class="row breaking-news">
-    <div class="col-md-3">
+    <div class="col-md-3 tab-pane" id="known">
     
         <h3>What We Know</h3>
         <h5>Updated at 4:21 p.m.</h5>
@@ -72,7 +81,7 @@
 
     </div>
     
-    <div class="col-md-3">
+    <div class="col-md-3 tab-pane" id="unknown">
         <h3>What We're Chasing</h3>
         <h5>Updated at 4:26 p.m.</h5>
         <ul class="news-items">
@@ -86,7 +95,7 @@
         </ul>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 tab-pane" id="watching">
         <h3>What We're Not Chasing</h3>
         <h5>Updated at 4:26 p.m.</h5>
         <ul class="news-items">
@@ -100,7 +109,7 @@
         </ul>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 tab-pane" id="false">
         <h3>What We've Ruled Out</h3>
         <h5>Updated at 5:37 p.m.</h5>
         <ul class="news-items">
