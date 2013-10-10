@@ -6,8 +6,8 @@ Update Twitter/Facebook links,,Launch TODO
 Get npr.org redirect (short URL),,Launch TODO
 Create Seamus shell page and request redirect,,Launch TODO
 Update widget analytics with project name,,Launch TODO
-Browser testing: IE8,,
 Browser testing: IE9,,
+Browser testing: IE10,,
 Browser testing: Latest Firefox,,
 Browser testing: Latest Chrome,,
 Browser testing: Desktop Safari,,
@@ -20,3 +20,11 @@ Data download,,
 Link to repo,,
 Ad,,
 Double-check analytics code,,Launch TODO
+DevOps: Enable scout monitor for /<project_slug>/test/,,Launch TODO
+Write the team blog post,,Launch TODO
+Update master sitemaps index and redeploy,,Launch TODO
+Email Emerson in marketing,,Launch TODO
+Schedule iteration reviews,,Project Management
+Schedule sprint planning meetings,,Project Management
+Schedule sprint retrospectives,,Project Management
+Setup Hipchat service hook on github,,
