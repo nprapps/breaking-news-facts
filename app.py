@@ -2,6 +2,7 @@
 
 import json
 from mimetypes import guess_type
+import time
 import urllib
 
 import envoy
@@ -9,23 +10,36 @@ from flask import Flask, Markup, abort, render_template
 
 import app_config
 import copytext
+import data
+import models
 from render_utils import flatten_app_config, make_context
 
 app = Flask(app_config.PROJECT_NAME)
 
 
-@app.route('/admin/events/')
-def event_list():
-    context = make_context()
-    context['events'] = Event.select()
-    return render_template('admin/event_list.html', **context)
+@app.route('/events.json')
+def events_json():
+    output = []
+    events = models.Event.select()
+    for event in events:
+        output.append(event.as_dict())
+    return json.dumps(output)
 
 
-@app.route('/admin/events/<int:event_id>/')
-def event_detail(event_id):
-    context = make_context()
-    context['event'] = Event.select().where(Event.id==event_id)[0]
-    return render_template('admin/event_detail.html', **context)
+@app.route('/events/<int:event_id>.json')
+def facts_json(event_id):
+    output = []
+    event = models.Event.select().where(models.Event.id == event_id)[0]
+    primary_facts = models.Fact.select().join(models.Event).where(models.Fact.related_facts >> None).order_by(models.Fact.timestamp.desc())
+    for fact in primary_facts:
+        fact_node = []
+        fact_node.append(fact.as_dict())
+        related_facts = models.Fact.select().where(models.Fact.related_facts == fact)
+        for related_fact in related_facts:
+            fact_node.append(related_fact.as_dict())
+        fact_node = sorted(fact_node, key=lambda f: f['timestamp'], reverse=True)
+        output.append(fact_node)
+    return json.dumps(output)
 
 
 @app.route('/')

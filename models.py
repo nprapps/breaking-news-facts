@@ -1,4 +1,5 @@
 import datetime
+import time
 
 from peewee import *
 
@@ -46,11 +47,17 @@ class Event(Model):
     def __unicode__(self):
         return self.name
 
+    def as_dict(self):
+        output = {}
+        output['name'] = self.name
+        output['start_time'] = time.mktime(self.time.timetuple())
+        return output
 
 class Fact(Model):
     """
     An instance of a fact. Related to a master fact.
     """
+    event = ForeignKeyField(Event, null=True)
     statement = TextField()
     attribution = TextField()
     timestamp = DateTimeField()
@@ -71,3 +78,11 @@ class Fact(Model):
 
     def __unicode__(self):
         return self.statement
+
+    def as_dict(self):
+        output = dict(self.__dict__['_data'])
+        output['timestamp'] = time.mktime(output['timestamp'].timetuple())
+        output['time_string'] = self.timestamp.isoformat()
+        output.pop('event')
+        output.pop('related_facts')
+        return output
