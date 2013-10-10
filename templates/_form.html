@@ -1,0 +1,39 @@
+<!-- statement = TextField()
+attribution = TextField()
+timestamp = DateTimeField()
+    # Status choices (enforced at the app level, sadly):
+    # 0 - Has been confirmed as false.
+    # 1 - Has been confirmed as true.
+    # 2 - Neither confirmed nor denied nor checking.
+    # 3 - Possibly true, checking.
+status = IntegerField(default=2) -->
+
+
+<form method="get" action="_form.asp">
+
+<p>Name:
+<br><input type="text" name="name" size="35"></p>
+
+<p>Statement:
+<br><textarea name="statement" cols="30" rows="4"></textarea></p>
+
+<p>Attribution:
+<br><textarea name="attribution" cols="30" rows="1"></textarea></p>
+
+<p>Timestamp (Date and Time):
+<br><input type="datetime" name="bdaytime"></p>
+
+<!-- Status Choices -->
+
+<p>Status of Fact<br>
+<select>
+	<option value="0">Has been confirmed as false.</option>
+	<option value="1">Has been confirmed as true.</option>
+	<option value="2" selected>Neither confirmed nor denied nor checking.</option>
+	<option value="3">Possibly true, checking.</option>
+</select>
+</p>
+
+<p><input type="submit" value="Submit"></p>
+
+</form>
