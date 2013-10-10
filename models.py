@@ -1,12 +1,15 @@
 from peewee import *
 
-psql_db = PostgresqlDatabase('breaking', user='breaking', pass='breaking')
+from app_config import get_secrets
 
-class PostgresqlModel(Model):
-    class Meta:
-        database = psql_db
+secrets = get_secrets()
 
-class Event(PostgresqlModel):
+psql_db = PostgresqlDatabase('breaking',
+    user=secrets['APPS_USER'],
+    password=secrets['APPS_PASS']
+)
+
+class Event(Model):
     name = CharField()
     start_date = DateField()
 
@@ -18,7 +21,7 @@ class Event(PostgresqlModel):
         return '/admin/events/%s/' % self.id
 
 
-class Fact(PostgresqlModel):
+class Fact(Model):
     statement = TextField()
     attribution = TextField()
     timestamp = DateTimeField()
