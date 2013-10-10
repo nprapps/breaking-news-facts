@@ -1,15 +1,20 @@
 #!/usr/bin/env python
 
 import copy
+import csv
+import datetime
 from glob import glob
 import os
 
 from fabric.api import *
 from jinja2 import Template
+import requests
 
 import app
 import app_config
+import data
 from etc import github
+import models
 
 """
 Base configuration
@@ -457,6 +462,21 @@ def cron_test():
 
     local('echo $DEPLOYMENT_TARGET > /tmp/cron_test.txt')
 
+
+def drop_tables():
+    models.delete_tables()
+
+
+def create_tables():
+    models.create_tables()
+
+
+def bootstrap():
+    data.delete_facts()
+    data.load_test_event()
+    data.load_test_facts()
+
+
 """
 Destruction
 
@@ -482,7 +502,7 @@ def nuke_confs():
             installed_path = _get_installed_conf_path(service, remote_path, extension)
 
             sudo('rm -f %s' % installed_path)
-            
+
             if service == 'nginx':
                 sudo('service nginx reload')
             elif service == 'uwsgi':
@@ -528,8 +548,8 @@ def app_template_bootstrap(project_name=None, repository_name=None):
 
     config = {}
     config['$NEW_PROJECT_SLUG'] = os.getcwd().split('/')[-1]
-    config['$NEW_PROJECT_NAME'] = project_name or config['$NEW_PROJECT_SLUG'] 
-    config['$NEW_REPOSITORY_NAME'] = repository_name or config['$NEW_PROJECT_SLUG'] 
+    config['$NEW_PROJECT_NAME'] = project_name or config['$NEW_PROJECT_SLUG']
+    config['$NEW_REPOSITORY_NAME'] = repository_name or config['$NEW_PROJECT_SLUG']
     config['$NEW_PROJECT_FILENAME'] = config['$NEW_PROJECT_SLUG'].replace('-', '_')
 
     _confirm("Have you created a Github repository named \"%s\"?" % config['$NEW_REPOSITORY_NAME'])
