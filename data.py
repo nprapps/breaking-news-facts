@@ -38,6 +38,8 @@ def load_test_facts():
             if models.Fact.select().where(models.Fact.statement == row['statement']).count() == 0:
                 m = models.Fact(**row)
                 m.save()
+                m.event = models.Event.select().where(models.Event.id == 1)
+                m.save()
 
     with open('data/facts.csv', 'rb') as readfile:
         csvfile = csv.DictReader(readfile)
