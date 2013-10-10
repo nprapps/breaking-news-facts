@@ -22,9 +22,9 @@ $(function() {
     var $content = $('#content');
     var $tabs = $('#breaking-tabs');
     var $w = $(window);
-    var sections = [ 'known', 'unknown', 'false' ];
+    var sections = [ 'known', 'unknown', 'watching', 'false' ];
     var tab_active = null;
-    var window_breakpoint = 991;
+    var window_breakpoint = 976;
     
     function setup_tabs() {
         for (s in sections) {
@@ -40,6 +40,7 @@ $(function() {
 
     function reset_tabs() {
         var window_width = $w.width();
+        console.log(window_width, $content.width());
         if (window_width <= window_breakpoint) {
             if (tab_active == null) {
                 $tabs.find('li:eq(0)').trigger('click');
