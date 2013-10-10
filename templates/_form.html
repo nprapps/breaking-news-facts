@@ -7,33 +7,119 @@ timestamp = DateTimeField()
     # 2 - Neither confirmed nor denied nor checking.
     # 3 - Possibly true, checking.
 status = IntegerField(default=2) -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<style type=""text/css"">
+
+	header {
+		height: 80px;
+		width: 960px;
+		padding: 30px;
+		margin: auto;
+		margin-bottom: 30px;
+		margin-top: 30px;
+		font-family: "Helvetica Neue", Arial, sans-serif;
+		background-color: white;
+		text-align: center;
+		box-shadow: 5px 5px 5px #888888;
+	}
+
+	body {
+		background-color: #DCDCDC;
+	}
+
+	.wrapper {
+		width: 960px;
+		height: 350px;
+		padding: 30px;
+		margin: auto;
+		margin-bottom: 30px;
+		font-family: "Helvetica Neue", Arial, sans-serif;
+		background-color: white;
+		box-shadow: 5px 5px 5px #888888;
+
+	}
 
 
-<form method="get" action="_form.asp">
+	.left {
+		float: left;
+	}
 
-<p>Name:
-<br><input type="text" name="name" size="35"></p>
+	.right {
+		float: right;
+	}
 
-<p>Statement:
-<br><textarea name="statement" cols="30" rows="4"></textarea></p>
+	.date-time-field {
+		font-size: 1.35em;
+		height: 30px;
+	}
 
-<p>Attribution:
-<br><textarea name="attribution" cols="30" rows="1"></textarea></p>
+	#submit-button {
+		float: right;
+		clear: both;
+	}
 
-<p>Timestamp (Date and Time):
-<br><input type="datetime" name="bdaytime"></p>
+	#name-field {
+		line-height: 3em;
+	}
 
-<!-- Status Choices -->
+</style>
 
-<p>Status of Fact<br>
-<select>
-	<option value="0">Has been confirmed as false.</option>
-	<option value="1">Has been confirmed as true.</option>
-	<option value="2" selected>Neither confirmed nor denied nor checking.</option>
-	<option value="3">Possibly true, checking.</option>
-</select>
-</p>
+</head>
 
-<p><input type="submit" value="Submit"></p>
+<header>
+		<h1>NPR: Breaking News</h1>
+</header>
 
-</form>
+<body>
+
+	<div class="wrapper">
+	
+		<form method="get" action="_form.asp">
+
+			<div class="left">
+				
+				<p>Name:
+				<br><input type="text" id="name-field" name="name" size="65"></p>
+		
+				<p>Attribution:
+				<br><textarea id="attribution-field" name="attribution" cols="47" rows="3"></textarea></p>
+
+				<p>Timestamp (Date and Time):
+				<br><input type="date" name="date" class="date-time-field">
+				<input type="time" name="time" class="date-time-field"></p>
+		
+
+				<!-- Status Choices -->
+				<div id="status-field">
+					<p>Status of Fact<br>
+					<select>
+						<option value="0">Has been confirmed as false.</option>
+						<option value="1">Has been confirmed as true.</option>
+						<option value="2" selected>Neither confirmed nor denied nor checking.</option>
+						<option value="3">Possibly true, checking.</option>
+					</select>
+					</p>
+				</div>
+
+			</div>
+
+			
+			<div class="right" id="statement-field">
+					<p>Statement:
+					<br><textarea name="statement" cols="80" rows="19"></textarea></p>
+
+			</div>
+
+			<div id="submit-button"><p><input type="submit" value="Submit"></p></div>
+
+		</form>
+
+	</div>
+
+</body>
+
+
+</html>
