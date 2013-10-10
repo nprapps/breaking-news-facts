@@ -1,0 +1,115 @@
+.breaking-overview {
+    padding-bottom: 33px;
+
+    .span3 {
+        padding-top: 8px;
+
+        p { 
+            font-size: 14px;
+            color: #666;
+        }
+    }
+}
+
+.listen-live {
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: bold;
+    
+    strong {
+        display: block;
+        margin-bottom: 3px;
+        color: #666;
+        text-transform: lowercase;
+    }
+}
+
+#content {
+    margin-top: 0;
+}
+
+.breaking-news {
+    padding-bottom: 33px; 
+
+    h3 {
+        font-size: 18px;
+        margin-bottom: 11px;
+        color: #666;
+    }
+    h4 {
+        margin: 0 0 6px 0;
+        background-color: #666;
+        color: #fff;
+        font-size: 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+        display: inline-block;
+        line-height: 15px;
+        padding: 0 6px;
+    }
+    h5 {
+        margin-bottom: 22px;
+    }
+    
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        
+        &.meta { margin-top: 6px; }
+        &.revisions { 
+            margin-top: 6px;
+            display: none;
+        }
+    }
+    li {
+        &.revisions {
+            margin-top: 11px;
+            
+            strong {
+                color: #999;
+                font-size: 11px;
+                font-weight: normal;
+                background-color: #bababa;
+                color: #fff;
+                line-height: 15px;
+                padding: 0 6px;
+                display: inline-block;
+                
+                &:hover {
+                    opacity: .7;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    
+    ul.news-items > li {
+        padding: 11px;
+        border-bottom: 2px solid #fff;
+        font-size: 14px;
+        color: #121212;
+        background-color: #f1f1f1;
+
+        &.new { 
+            background-color: #FBF1CD;
+            
+            h4 { background-color: #B39429; }
+        }
+        &.updated { 
+            background-color: #F7E5E2;
+            
+            h4 { background-color: #D8472B; }
+        }
+    }
+    
+    ul.meta > li {
+        font-size: 12px;
+        color: #666;
+    }
+    
+    ul.revisions > li {
+        list-style-type: square;
+        margin-left: 1.2em;
+    }
+}
