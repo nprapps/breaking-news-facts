@@ -44,8 +44,19 @@ class Event(Model):
     def get_detail_uri(self):
         return '/event-%s.json' % self.id
 
+    def get_admin_url(self):
+        return '/admin/events/%s/' % self.id
+
     def __unicode__(self):
         return self.name
+
+    def primary_facts(self):
+        return Fact\
+            .select()\
+            .join(Event)\
+            .where(Fact.event == self)\
+            .where(Fact.related_facts >> None)\
+            .order_by(Fact.timestamp.desc())
 
     def as_dict(self):
         output = {}
@@ -79,6 +90,21 @@ class Fact(Model):
 
     def __unicode__(self):
         return self.statement
+
+    def get_pretty_time(self):
+        minute = str(self.timestamp.minute).zfill(2)
+        hour = self.timestamp.strftime('%-I')
+        ampm = self.timestamp.strftime('%p')
+        return '%s:%s %s' % (hour, minute, ampm)
+
+    def get_status(self):
+        STATUS_LIST = ['Confirmed: False', 'Confirmed: True', 'Unconfirmed: Not Verifying', 'Unconfirmed: Verifying']
+        return STATUS_LIST[self.status]
+
+    def get_related_facts(self):
+        if Fact.select().where(Fact.related_facts == self).count() == 0:
+            return None
+        return Fact.select().where(Fact.related_facts == self).order_by(Fact.timestamp.desc())
 
     def as_dict(self):
         output = dict(self.__dict__['_data'])

@@ -16,6 +16,12 @@ from render_utils import flatten_app_config, make_context
 
 app = Flask(app_config.PROJECT_NAME)
 
+@app.route('/admin/api/events/fact/<int:fact_id>/<string:verb>/', methods=['GET', 'POST'])
+def _admin_api_fact_detail(fact_id, verb):
+    if verb:
+        if verb == 'read':
+            fact = models.Fact.select().where(models.Fact.id == fact_id)[0]
+            return json.dumps(fact.as_dict())
 
 @app.route('/events.json')
 def events_json():
@@ -28,18 +34,47 @@ def events_json():
 
 @app.route('/event-<int:event_id>.json')
 def facts_json(event_id):
+    """
+    Outputs a list of lists.
+    The outer list is all facts in this event.
+    The inner lists are the sets of related facts.
+    Inner lists are sorted newest -> oldest.
+    Outer list is also sorted newest -> oldest.
+    """
     output = []
+
     event = models.Event.select().where(models.Event.id == event_id)[0]
-    primary_facts = models.Fact.select().join(models.Event).where(models.Fact.related_facts >> None).order_by(models.Fact.timestamp.desc())
+
+    primary_facts = event.primary_facts()
+
     for fact in primary_facts:
         fact_node = []
         fact_node.append(fact.as_dict())
-        related_facts = models.Fact.select().where(models.Fact.related_facts == fact)
-        for related_fact in related_facts:
-            fact_node.append(related_fact.as_dict())
-        fact_node = sorted(fact_node, key=lambda f: f['timestamp'], reverse=True)
+
+        if fact.get_related_facts():
+            related_facts = fact.get_related_facts()
+
+            for related_fact in related_facts:
+                fact_node.append(related_fact.as_dict())
+
+            fact_node = sorted(fact_node, key=lambda f: f['timestamp'], reverse=True)
         output.append(fact_node)
+
     return json.dumps(output)
+
+@app.route('/admin/events/')
+def _admin_event_list():
+    return render_template('admin_event_list.html', events=models.Event.select())
+
+
+@app.route('/admin/events/<int:event_id>/')
+def _admin_event_detail(event_id):
+    context = {}
+    context['event'] = models.Event.select().where(models.Event.id == event_id)[0]
+    context['primary_facts'] = context['event'].primary_facts()
+
+    return render_template('admin_event_detail.html', **context)
+
 
 
 @app.route('/')
