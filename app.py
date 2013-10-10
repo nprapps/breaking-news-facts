@@ -26,7 +26,7 @@ def events_json():
     return json.dumps(output)
 
 
-@app.route('/events/<int:event_id>.json')
+@app.route('/event-<int:event_id>.json')
 def facts_json(event_id):
     output = []
     event = models.Event.select().where(models.Event.id == event_id)[0]

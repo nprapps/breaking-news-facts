@@ -41,8 +41,8 @@ class Event(Model):
         database = psql_db
         db_table = 'events'
 
-    def get_admin_url(self):
-        return '/admin/events/%s/' % self.id
+    def get_detail_uri(self):
+        return '/event-%s.json' % self.id
 
     def __unicode__(self):
         return self.name
@@ -50,7 +50,8 @@ class Event(Model):
     def as_dict(self):
         output = {}
         output['name'] = self.name
-        output['start_time'] = time.mktime(self.time.timetuple())
+        output['start_time'] = time.mktime(self.start_date.timetuple())
+        output['detail_uri'] = self.get_detail_uri()
         return output
 
 class Fact(Model):
