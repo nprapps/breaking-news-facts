@@ -14,19 +14,19 @@ import os
 NAMES
 """
 # Project name used for display
-PROJECT_NAME = '$NEW_PROJECT_NAME'
+PROJECT_NAME = 'Breaking News Facts'
 
 # Project name in urls
 # Use dashes, not underscores!
-PROJECT_SLUG = '$NEW_PROJECT_SLUG'
+PROJECT_SLUG = 'breaking-news-facts'
 
 # The name of the repository containing the source
-REPOSITORY_NAME = '$NEW_REPOSITORY_NAME'
+REPOSITORY_NAME = 'breaking-news-facts'
 REPOSITORY_URL = 'git@github.com:nprapps/%s.git' % REPOSITORY_NAME
 REPOSITORY_ALT_URL = None # 'git@bitbucket.org:nprapps/%s.git' % REPOSITORY_NAME'
 
 # The name to be used in paths on the server
-PROJECT_FILENAME = '$NEW_PROJECT_FILENAME'
+PROJECT_FILENAME = 'breaking-news-facts'
 
 """
 DEPLOYMENT

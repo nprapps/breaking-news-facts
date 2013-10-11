@@ -6,6 +6,7 @@
 {{ CSS.push('less/breaking-news-board.less') }}
 {% endblock extra_css %}
 
+{% block body_class %}board public{% endblock body_class %}
 
 {% block header_content %}
 <header>
@@ -13,12 +14,12 @@
         <div class="row">
             <div class="col-md-10">
                 <h1>Boston Marathon Explosions</h1>
-                <h2>April 15, 2013, 3:19 p.m.: Two explosions have been reported in Boston's Copley Square near the Boston Marathon finish line. We will continue with live updates as the news develops. Visit <a href="http://www.npr.org/blogs/thetwo-way/2013/04/16/177427130/boston-marathon-explosions-latest-developments">The Two Way</a> for complete coverage from NPR News.</h2>
+                <h2>April 15, 2013, 3:19 p.m.: Two explosions have been reported in Boston's Copley Square near the Boston Marathon finish line. We will continue with live updates as the news develops. Visit <a href="http://www.npr.org/blogs/thetwo-way/2013/04/16/177427130/boston-marathon-explosions-latest-developments">The Two Way</a> for complete coverage from NPR News. (<a href="#about">What am I looking at?</a>)</h2>
             </div>
             <div class="col-md-2">
                 <div class="listen-live">
                     <strong>Listen Live</strong>
-                    <a href="http://www.wbur.org/listen/live"><i class="icon-volume-up"></i> WBUR (Boston)</a><br />
+                    <a href="http://www.wbur.org/listen/live"><i class="icon-volume-up"></i> WBUR (Boston)</a> 
                     <a href="http://www.npr.org/audiohelp/progstream.html"><i class="icon-volume-up"></i> NPR Program Stream</a>
                 </div>
             </div>
@@ -58,5 +59,16 @@
     </div>
         
 </div>
+
+<div class="row" id="about">
+    <div class="col-md-10">
+        <hr />
+        <h3>What Am I Looking At?</h3>
+        <p>You're looking at an experimental project designed by the NPR Apps team and the Social Media team at NPR.</p>
+        <p>As a newsroom, we don't report facts until they are verified. We wanted to let you see what we do know, how we know what we know, and what we're actively working on verifying during breaking news events.</p>
+        <p>Inspiration: The Makah people of the Pacific Northwest have evidence <a href="http://en.wikipedia.org/wiki/Makah_language#Morphology">built into their verb tenses</a>. You can't grammatically build a sentence without explaining how you know what you know.</p>
+    </div>
+</div>
+
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 {% endblock %}

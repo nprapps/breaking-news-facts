@@ -1,0 +1,20 @@
+<li>
+    <div class="news-item">
+        <% if (!public) { %>
+        <span class="not-public">NOT REPORTABLE:</span>
+        <% } %>
+        <%= statement %>
+    </div>
+    <ul class="meta">
+        <li class="date-added">Updated <%= date_relative %></li>
+        <li class="source">
+            Source: 
+            <% if (is_tweet) { %>
+                <a href="<%= attribution %>">Twitter</a>
+            <% } else { %>
+                <%= attribution %>
+            <% } %>
+            (via <%= reporter %>)
+        </li>
+    </ul>
+</li>

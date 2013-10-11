@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>{% block title %}{{ PROJECT_NAME }}{% endblock title %}</title>
+    <title>$NEW_PROJECT_NAME</title>
 
-    <meta name="description" content="{{ PROJECT_DESCRIPTION }}">
+    <meta name="description" content="An opinionated project template for (mostly) server-less apps.">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -14,44 +14,46 @@
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
 
     <!-- CSS -->
-    {{ CSS.push('less/app.less') }}
-    {% block extra_css %}{% endblock extra_css %}
-    {{ CSS.render('css/app.min.css') }}
+    
+    
+
+
+    <link rel="stylesheet" type="text/css" href="../css/app.min.css" />
 
     <!-- JS -->
-    {{ JS.push('js/app_config.js') }}
-    {{ JS.push('js/copy.js') }}
-    {{ JS.push('js/console.js') }}
-    {{ JS.push('js/lib/jquery-1.8.3.js') }}
-    {{ JS.push('js/lib/html5.js') }}
-    {{ JS.push('js/lib/modernizr.js') }}
-    {% block extra_head_js %}{% endblock extra_head_js %}
-    {{ JS.render('js/app-header.min.js') }}
+    
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="../js/app-header.min.js"></script>
 
-    {# Twitter #}
+    
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@nprapps">
-    <meta name="twitter:image" content="{{ TWITTER.IMAGE_URL }}" />
+    <meta name="twitter:image" content="" />
 
-    {# Facebook #}
-    <meta property="og:title" content="{{ FACEBOOK.TITLE }}" />
-    <meta property="og:url" content="{{ FACEBOOK.URL }}" />
+    
+    <meta property="og:title" content="$NEW_PROJECT_NAME" />
+    <meta property="og:url" content="http://apps.npr.org/$NEW_PROJECT_SLUG/" />
     <meta property="og:type" content="article" />
-    <meta property="og:description" content="{{ FACEBOOK.DESCRIPTION }}" />
-    <meta property="og:image" content="{{ FACEBOOK.IMAGE_URL }}" />
+    <meta property="og:description" content="An opinionated project template for (mostly) server-less apps." />
+    <meta property="og:image" content="" />
     <meta property="og:site_name" content="NPR.org" />
-    <meta property="fb:app_id" content="{{ FACEBOOK.APP_ID }}" />
+    <meta property="fb:app_id" content="138837436154588" />
 
-    {# Google News #}
-    <meta name="thumbnail" content="{{ GOOGLE.IMAGE_URL }}" />
+    
+    <meta name="thumbnail" content="" />
 
-    {% block extra_head %}
-    {% endblock extra_head %}
+    
+    
 </head>
-<body class="{% block body_class %}{% endblock body_class %}">
+<body class="">
     <a class="sr-only" href="#content">Skip To Content</a>
 
-    {% block outer_content %}
+    
     <nav role="navigation">
         <ul class="site-links">
             <li class="npr"><a href="http://npr.org"><img src="http://media.npr.org/chrome/news/nprlogo_138x46.gif" alt="NPR" /></a></li>
@@ -61,8 +63,8 @@
             <li class="listen"><a href="http://www.npr.org/listen/">Listen</a></li>
         </ul>
         <ul class="social-links">
-            <li class="twitter"><a rel="external" href="http://twitter.com/share?text={{ TWITTER.TEXT|urlencode }}&amp;url={{ TWITTER.URL|urlencode }}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Navbar', '{{ PROJECT_NAME }}']);">Share This Page On Twitter</a></li>
-            <li class="facebook"><a rel="external" href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK.APP_ID }}&amp;link={{ FACEBOOK.URL|urlencode }}&amp;name={{ FACEBOOK.TITLE|urlencode }}&amp;picture={{ FACEBOOK.IMAGE_URL|urlencode }}&amp;redirect_uri={{ FACEBOOK.URL|urlencode }}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Navbar', '{{ PROJECT_NAME }}']);">Like This Page On Facebook</a></li>
+            <li class="twitter"><a rel="external" href="http://twitter.com/share?text=%24NEW_PROJECT_NAME&amp;url=http%3A%2F%2Fapps.npr.org%2F%24NEW_PROJECT_SLUG%2F" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Navbar', '$NEW_PROJECT_NAME']);">Share This Page On Twitter</a></li>
+            <li class="facebook"><a rel="external" href="https://www.facebook.com/dialog/feed?app_id=138837436154588&amp;link=http%3A%2F%2Fapps.npr.org%2F%24NEW_PROJECT_SLUG%2F&amp;name=%24NEW_PROJECT_NAME&amp;picture=&amp;redirect_uri=http%3A%2F%2Fapps.npr.org%2F%24NEW_PROJECT_SLUG%2F" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Navbar', '$NEW_PROJECT_NAME']);">Like This Page On Facebook</a></li>
         </ul>
         <ul class="site-links-2">
             <li class="stations"><a href="http://www.npr.org/templates/stations/stations/">Stations</a></li>
@@ -71,13 +73,39 @@
         </ul>
     </nav>
 
-    {% block header_content %}
-    {% endblock header_content %}
+    
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Breaking News Facts</h1>
+                <h2>NPR Serendipity Day, May 2013&nbsp;&nbsp;|&nbsp;&nbsp;Jeremy Bowers, Alyson Hurt and JoElla Straley</h2>
+            </div>
+        </div>
+    </div>
+</header>
+
 
     <section id="content">
         <div class="container">
-            {% block wide_content %}
-            {% endblock wide_content %}
+            
+<div class="row breaking-overview">
+    <div class="col-md-6">
+        <h3>About This Project</h3>
+        <p>The epistemology of breaking news: We're looking to put together a single digital source of truth for "what we know to be true" during breaking news events. What do we know? And why do we know what we know? We'll focus on attribution, transparency, aggregation and fact-checking. We aim to deliver a usable prototype.</p>
+        <p>Aside: Did you know that the Makah people of the Pacific Northwest have evidence <a href="http://en.wikipedia.org/wiki/Makah_language#Morphology">built into their verb tenses</a>? You literally can't grammatically build a sentence without explaining how you know what you know.</p>
+    </div>
+    <div class="col-md-3">
+        <h4>Case Study: Boston Marathon</h4>
+        <p>The newsroom circulated regularly updated lists of known facts about the Boston Marathon explosions. This case study takes a sample of those e-mails and organizes them in a slightly different way.</p>
+        <p><a href="msg-1.html" class="btn btn-blue">Begin</a></p>
+    </div>
+    <div class="col-md-3">
+        <h4>Findings</h4>
+        <p><a href="https://docs.google.com/document/d/12tXv-kHxwf6bK5ZUGGQrMbWJff5xSYiLh3HORyf-K6c/edit">Interviews with Newsroom personnel who deal with breaking news</a> (Google Doc)</li>
+    </div>
+</div>
+
         </div>
     </section>
 
@@ -104,23 +132,23 @@
         </div>
     </footer>
 
-    {% endblock outer_content %}
+    
 
-    {{ JS.push('js/lib/underscore.js') }}
-    {{ JS.push('js/lib/moment.js') }}
-    {{ JS.push('js/lib/bootstrap.js') }}
-    {% block extra_foot_js %}{% endblock extra_foot_js %}
-    {{ JS.push('js/templates.js') }}
-    {{ JS.push('js/app.js') }}
-    {{ JS.render('js/app-footer.min.js') }}
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="../js/app-footer.min.js"></script>
 
-    {% block extra_foot %}
-    {% endblock extra_foot %}
+    
+    
 
     <!-- GOOGLE ANALYTICS -->
     <script type="text/javascript">
         var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '{{ GOOGLE_ANALYTICS_ID }}']);
+        _gaq.push(['_setAccount', 'UA-5828686-4']);
         _gaq.push(['_trackPageview']);
         (function() {
             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
