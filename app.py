@@ -87,18 +87,18 @@ def index():
 def form():
     return render_template('_form.html', **make_context())
 
-
 @app.route('/board-public.html')
-def public():
+def board_public():
+
     return render_template('board-public.html', **make_context())
 
 
 @app.route('/board-internal.html')
-def internal():
+def board_internal():
     return render_template('board-internal.html', **make_context())
 
 @app.route('/email-internal.html')
-def email():
+def email_internal():
     return render_template('email-internal.html', **make_context())
 
 
