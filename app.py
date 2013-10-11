@@ -83,6 +83,11 @@ def index():
     """
     return render_template('index.html', **make_context())
 
+@app.route('/form.html')
+def index():
+    return render_template('_form.html', **make_context())
+
+
 # Boston Marathon pages
 @app.route('/<string:filename>')
 def messages(filename):
