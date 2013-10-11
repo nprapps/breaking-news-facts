@@ -83,7 +83,7 @@ def index():
     """
     return render_template('index.html', **make_context())
 
-@app.route('/form.html')
+@app.route('/_form.html')
 def form():
     return render_template('_form.html', **make_context())
 
