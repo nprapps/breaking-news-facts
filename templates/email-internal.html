@@ -1,0 +1,41 @@
+{% extends '_email.html' %}
+
+{% block title %}Breaking News: Boston Marathon Explosions : NPR{% endblock title %}
+
+{% block extra_css %}{% endblock extra_css %}
+
+{% block body_class %}email internal{% endblock body_class %}
+
+{% block header_content %}
+<h1>Boston Marathon Explosions</h1>
+{% endblock %}
+
+{% block wide_content %}
+<div id="known">
+    <h3>What We've Confirmed</h3>
+    <ul class="news-items">
+    </ul>
+</div>
+
+<div id="unknown">
+    <h3>What We're Chasing</h3>
+    <ul class="news-items">
+    </ul>
+</div>
+
+<div id="watching">
+    <h3>What We're Watching (Not Reportable)</h3>
+    <ul class="news-items">
+        <li class="new">
+        </li>
+    </ul>
+</div>
+
+<div id="false">
+    <h3>What We've Ruled Out</h3>
+    <ul class="news-items">
+    </ul>
+</div>
+{% endblock %}
+
+{% block extra_foot_js %}{% endblock extra_foot_js %}

@@ -5,24 +5,54 @@ $(function() {
     var $column_unknown = $('#unknown');
     var $column_watching = $('#watching');
     
+    var $b = $('body');
     var $tabs = $('#breaking-tabs');
     var $w = $(window);
 
     var sections = [ 'known', 'unknown', 'watching', 'false' ];
     var tab_active = null;
     var window_breakpoint = 976;
+    
+    var page_type;
+    var page_scope;
 
 
     /* DATA */
-    function empty_columns() {
-        $column_false.find('ul.news-items').empty();
-        $column_known.find('ul.news-items').empty();
-        $column_unknown.find('ul.news-items').empty();
-        $column_watching.find('ul.news-items').empty();
-    }
-    function embed_tweet(tweet_id) {
-        var embed_code = '';
-        return embed_code;
+    function filter_data(data) {
+        var filtered_data = [];
+
+        $.each(data, function (k, v) {
+            if (v != undefined) {
+                var filtered_data_item = [];
+                $.each(v, function(i, f) {
+                    if (f != undefined) {
+                        var is_approved = f.approved;
+                        var is_public = f.public;
+                        
+                        switch(page_scope) {
+                            case 'public':
+                                if (page_scope == 'public' && is_public && is_approved) {
+                                    filtered_data_item.push(f);
+                                }
+                                break;
+                            case 'internal':
+                                if (is_approved) {
+                                    filtered_data_item.push(f);
+                                }
+                                break;
+                        }
+                    }
+                });
+                if (filtered_data_item.length > 0) {
+                    filtered_data.push(filtered_data_item);
+                }
+            }
+
+            if (v == undefined || v.length == 0) {
+                data.splice(k, 1);
+            }
+        });
+        return filtered_data;
     }
     function load_data() {
         $.getJSON('data/event-1.json', function(data) {
@@ -30,35 +60,36 @@ $(function() {
             var updates_known = '';
             var updates_unknown = '';
             var updates_watching = '';
+            
+            var data = filter_data(data);
         
             $.each(data, function(k,v) {
-                var is_approved = v[0].approved;
-                var is_public = v[0].public;
                 var is_tweet = false;
+                if (v[0].attribution.search('twitter.com') > -1) {
+                    is_tweet = true;
+                }
+                v[0].is_tweet = is_tweet;
+                v[0].date_relative = moment(v[0].time_string, "YYYYMMDD").fromNow();
+
                 var num_updates = v.length;
                 var this_update = '';
                 
-                if (is_approved) {
+                if (page_type == 'email') {
+                    this_update += JST.email_news_item(v[0]);
+                }
+                    
+                    /*
+                    var html = JST.playground_item(context);
+                    $search_results_ul.append(html);
+                    */
+
+                    /*
                     if (v[0].attribution.search('twitter.com') > -1) {
                         is_tweet = true;
                     }
                     this_update += '<li class="new">';
                     this_update += '<h4>New</h4>';
                     this_update += '<div class="news-item">' + v[0].statement;
-                    
-                    // doesn't work cross-domain; 
-                    // twitter embed code should be retrieved by admin instead
-                    /*
-                    if (is_tweet) { 
-                        var tweet_elements = v[0].attribution.split('/');
-                        var tweet_id = tweet_elements[(tweet_elements.length - 1)];
-                        console.log('TWEET ID: ' + tweet_id);
-                        $.getJSON('https://api.twitter.com/1/statuses/oembed.json?id=' + tweet_id _ '&omit_script=true', function(tweet) {
-                            this_update += tweet.html;
-                        });
-                    }
-                    */
-                    
                     this_update += '</div>';
                     
                     // tweet attribution, metadata
@@ -110,24 +141,25 @@ $(function() {
                     }
                     this_update += '</ul>'; // close metadata
                     this_update += '</li>';
+                    */
                     
-                    // assign to a column
-                    switch(v[0].status) {
-                        case 0: // false
-                            updates_false += this_update;
-                            break;
-                        case 1: // confirmed
-                            updates_known += this_update;
-                            break;
-                        case 2: // not chasing
-                            updates_watching += this_update;
-                            break;
-                        case 3: // chasing
-                            updates_unknown += this_update;
-                            break;
-                    }
                     
+                // assign to a column
+                switch(v[0].status) {
+                    case 0: // false
+                        updates_false += this_update;
+                        break;
+                    case 1: // confirmed
+                        updates_known += this_update;
+                        break;
+                    case 2: // not chasing
+                        updates_watching += this_update;
+                        break;
+                    case 3: // chasing
+                        updates_unknown += this_update;
+                        break;
                 }
+                    
                 console.log(this_update);
             });
             
@@ -184,6 +216,18 @@ $(function() {
     
     /* SETUP */
     function setup() {
+        if ($b.hasClass('board')) {
+            page_type = 'board';
+        } else if ($b.hasClass('email')) {
+            page_type = 'email';
+        }
+
+        if ($b.hasClass('public')) {
+            page_scope = 'public';
+        } else if ($b.hasClass('internal')) {
+            page_scope = 'internal';
+        }
+
         setup_tabs();
         load_data();
     }

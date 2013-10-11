@@ -1,0 +1,40 @@
+body {
+    font: 15px/1.4 Arial, Helvetica, sans-serif;
+    color: #121212;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h3 {
+    border-top: 2px solid #eee;
+    padding-top: 22px;
+    font-weight: normal;
+    font-size: 22px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    
+    &.news-items {
+        padding-bottom: 11px;
+
+        & > li {
+            margin-bottom: 22px;
+        }
+    }
+    &.meta {
+        color: #666;
+        font-size: 13px;
+        padding-top: 5px;
+        
+        margin-left: 22px;
+    }
+}
+
+.news-item {
+    .not-public {
+        color: #D8472B;
+    }
+}
