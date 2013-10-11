@@ -16,7 +16,7 @@ from render_utils import flatten_app_config, make_context
 
 app = Flask(app_config.PROJECT_NAME)
 
-@app.route('/admin/api/events/fact/<int:fact_id>/<string:verb>/', methods=['GET', 'POST'])
+@app.route('/admin/api/events/fact/<int:fact_id>/<string:verb>/', methods=['POST'])
 def _admin_api_fact_detail(fact_id, verb):
     if verb:
         if verb == 'read':
@@ -74,8 +74,6 @@ def _admin_event_detail(event_id):
     context['primary_facts'] = context['event'].primary_facts()
 
     return render_template('admin_event_detail.html', **context)
-
-
 
 @app.route('/')
 @app.route('/index.html')

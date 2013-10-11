@@ -69,6 +69,8 @@ class Fact(Model):
     """
     An instance of a fact. Related to a master fact.
     """
+    STATUS_LIST = ['Confirmed: False', 'Confirmed: True', 'Unconfirmed: Not Verifying', 'Unconfirmed: Verifying']
+
     event = ForeignKeyField(Event, null=True)
     statement = TextField()
     attribution = TextField()
@@ -91,6 +93,17 @@ class Fact(Model):
     def __unicode__(self):
         return self.statement
 
+    def status_widget(self):
+        template = "<select class='form-control'>"
+        for status in [0,1,2,3]:
+            template += "<option"
+            if self.status == status:
+                template += " selected"
+            template += ">%s</option>" % self.STATUS_LIST[status]
+        template += "</select>"
+        return template
+
+
     def get_pretty_time(self):
         minute = str(self.timestamp.minute).zfill(2)
         hour = self.timestamp.strftime('%-I')
@@ -98,8 +111,7 @@ class Fact(Model):
         return '%s:%s %s' % (hour, minute, ampm)
 
     def get_status(self):
-        STATUS_LIST = ['Confirmed: False', 'Confirmed: True', 'Unconfirmed: Not Verifying', 'Unconfirmed: Verifying']
-        return STATUS_LIST[self.status]
+        return self.STATUS_LIST[self.status]
 
     def get_related_facts(self):
         if Fact.select().where(Fact.related_facts == self).count() == 0:

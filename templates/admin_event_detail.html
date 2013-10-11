@@ -1,24 +1,62 @@
-<h1>{{ event.name }}</h1>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+<style type="text/css">
+    form { padding: 10px 25px; }
+    .view-more { display: block; }
+    .node { padding-top: 10px; padding-bottom: 10px;}
+    .node-grey { background-color: #f4f4f4; border: 1px solid #fff; }
+    .node-green { background-color: #dff0d8; }
+</style>
+<div class="row">
+    <div class="col-md-6 col-md-offset-1">
+        <h1>{{ event.name }}</h1>
+    </div>
+</div>
+<form role="form">
+    <div class="row node-green">
+        <div class="col-md-6 col-md-offset-1 node">
+            <label>Name</label>
+            <input class="form-control" type="text"></input>
+        </div>
+    </div>
 
-{% for fact in primary_facts %}
-    {% if fact.get_related_facts() %}{% for f in fact.get_related_facts() %}
-    <div data-fact-id="{{ f.id }}">
-        <input type="text" value="{{ f.get_status() }}"></input>
-        <input type="text" value="{{ f.get_pretty_time() }}"></input>
-        <textarea>{{ f.statement }}</textarea>
-        <textarea>{{ f.attribution }}</textarea>
-        <button class="btn btn-mini fact-button">save</button>
+    <div class="row">
+        {% for fact in primary_facts %}
+        <div class="col-md-3 node node node-grey">
+            {% if fact.get_related_facts() %}
+            <div class="view-more">
+                {% for f in fact.get_related_facts() %}
+                <div data-fact-id="{{ f.id }}">
+                    <label>Statement</label>
+                    <textarea class="form-control" rows="3">{{ f.statement }}</textarea>
+                    <label>Attribution</label>
+                    <textarea class="form-control" rows="3">{{ f.attribution }}</textarea>
+                    <label>Status</label>
+                    {{ f.status_widget()|safe }}
+                    <label>Timestamp</label>
+                    <input type="text" value="{{ f.get_pretty_time() }}" class="form-control"></input>
+                    <br/>
+                    <button class="btn btn-mini btn-info fact-button">save</button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+                <div data-fact-id="{{ fact.id }}">
+                    <label>Statement</label>
+                    <textarea class="form-control" rows="3">{{ fact.statement }}</textarea>
+                    <label>Attribution</label>
+                    <textarea class="form-control" rows="3">{{ fact.attribution }}</textarea>
+                    <label>Status</label>
+                    {{ fact.status_widget()|safe }}
+                    <label>Timestamp</label>
+                    <input type="text" value="{{ fact.get_pretty_time() }}" class="form-control"></input>
+                    <br/>
+                    <button class="btn btn-mini btn-info fact-button">save</button>
+                </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}{% endif %}
-    <div data-fact-id="{{ fact.id }}">
-            <input type="text" value="{{ fact.get_status() }}"></input>
-            <input type="text" value="{{ fact.get_pretty_time() }}"></input>
-            <textarea>{{ fact.statement }}</textarea>
-            <textarea>{{ fact.attribution }}</textarea>
-            <button class="btn btn-mini fact-button">save</button>
-    </div>
-<hr/>
-{% endfor %}
+</form>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <script type="text/javascript">
