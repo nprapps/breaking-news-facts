@@ -1,0 +1,14 @@
+<li>
+    <div class="news-item">
+        <span class="date"><%= date_relative %>:</span>
+        <%= statement %>
+
+        (Source: 
+        <% if (is_tweet) { %>
+            <a href="<%= attribution %>">Twitter</a>
+        <% } else { %>
+            <%= attribution %>
+        <% } %>
+        )
+    </div>
+</li>

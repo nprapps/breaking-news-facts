@@ -18,42 +18,6 @@ $(function() {
 
 
     /* DATA */
-    function filter_data(data) {
-        var filtered_data = [];
-
-        $.each(data, function (k, v) {
-            if (v != undefined) {
-                var filtered_data_item = [];
-                $.each(v, function(i, f) {
-                    if (f != undefined) {
-                        var is_approved = f.approved;
-                        var is_public = f.public;
-                        
-                        switch(page_scope) {
-                            case 'public':
-                                if (page_scope == 'public' && is_public && is_approved) {
-                                    filtered_data_item.push(f);
-                                }
-                                break;
-                            case 'internal':
-                                if (is_approved) {
-                                    filtered_data_item.push(f);
-                                }
-                                break;
-                        }
-                    }
-                });
-                if (filtered_data_item.length > 0) {
-                    filtered_data.push(filtered_data_item);
-                }
-            }
-
-            if (v == undefined || v.length == 0) {
-                data.splice(k, 1);
-            }
-        });
-        return filtered_data;
-    }
     function load_data() {
         $.getJSON('data/event-1.json', function(data) {
             var updates_false = '';
@@ -64,84 +28,37 @@ $(function() {
             var data = filter_data(data);
         
             $.each(data, function(k,v) {
-                var is_tweet = false;
-                if (v[0].attribution.search('twitter.com') > -1) {
-                    is_tweet = true;
-                }
-                v[0].is_tweet = is_tweet;
-                v[0].date_relative = moment(v[0].time_string, "YYYYMMDD").fromNow();
-
                 var num_updates = v.length;
                 var this_update = '';
                 
-                if (page_type == 'email') {
-                    this_update += JST.email_news_item(v[0]);
-                }
-                    
-                    /*
-                    var html = JST.playground_item(context);
-                    $search_results_ul.append(html);
-                    */
+                switch(page_type) {
+                    case 'email':
+                        this_update += JST.email_news_item(v[0]);
+                        break;
+                    case 'board':
+                        this_update += JST.board_news_item(v[0]);
 
-                    /*
-                    if (v[0].attribution.search('twitter.com') > -1) {
-                        is_tweet = true;
-                    }
-                    this_update += '<li class="new">';
-                    this_update += '<h4>New</h4>';
-                    this_update += '<div class="news-item">' + v[0].statement;
-                    this_update += '</div>';
-                    
-                    // tweet attribution, metadata
-                    this_update += '<ul class="meta">';
-                    this_update += '<li class="date-added">' + moment(v[0].time_string, "YYYYMMDD").fromNow() + '</li>';
-                    if (is_tweet) {
-                        this_update += '<li class="source">Source: <a href="' + v[0].attribution + '">Twitter</a></li>';
-                    } else {
-                        this_update += '<li class="source">Source: ' + v[0].attribution + '</li>';
-                    }
-                    this_update += '<li class="reporter">Added by: ' + v[0].reporter + '</li>';
-
-                    // previous versions of this fact
-                    if (num_updates > 1) {
-                        this_update += '<li class="revisions">';
-                        this_update += '<strong>' + (num_updates - 1) + ' previous ';
-                        if ((num_updates - 1) == 1) {
-                            this_update += 'version';
-                        } else {
-                            this_update += 'versions';
-                        }
-                        this_update += '</strong>';
-                        this_update += '<ul class="revisions">';
-
-                        for (var i = 1; i < num_updates; i++) {
-                            var is_rev_approved = v[i].approved;
-                            var is_rev_public = v[i].public;
-                            var is_rev_tweet = false;
-                            
-                            if (is_rev_approved) {
-                                if (v[i].attribution.search('twitter.com') > -1) {
-                                    is_rev_tweet = true;
-                                }
-                                this_update += '<li>';
-                                this_update += '<div class="news-item">';
-                                this_update += '<span class="date">' + moment(v[i].time_string, "YYYYMMDD").fromNow() + ':</span> ';
-                                this_update += v[i].statement;
-                                if (is_rev_tweet) {
-                                    this_update += ' (Source: <a href="' + v[0].attribution + '">Twitter</a>)';
-                                } else {
-                                    this_update += ' (Source: ' + v[i].attribution + ')';
-                                }
-                                this_update += '</div>';
-                                this_update += '</li>';
+                        // previous versions of this fact
+                        if (num_updates > 1) {
+                            this_update += '<li class="revisions">';
+                            this_update += '<strong>' + (num_updates - 1) + ' previous ';
+                            if ((num_updates - 1) == 1) {
+                                this_update += 'version';
+                            } else {
+                                this_update += 'versions';
                             }
+                            this_update += '</strong>';
+                            this_update += '<ul class="revisions">';
+                            for (var i = 1; i < num_updates; i++) {
+                                this_update += JST.board_revised_item(v[i]);
+                            }
+                            this_update += '</ul>'; // close revisions
+                            this_update += '</li>';
                         }
-                        this_update += '</ul>'; // close revisions
-                        this_update += '</li>';
-                    }
-                    this_update += '</ul>'; // close metadata
-                    this_update += '</li>';
-                    */
+                        this_update += '</ul>'; // close metadata
+                        this_update += '</li>'; // close item
+                        break;
+                }
                     
                     
                 // assign to a column
@@ -170,6 +87,54 @@ $(function() {
             
             toggle_revisions();
         });
+    }
+
+    function filter_data(data) {
+        var filtered_data = [];
+
+        $.each(data, function (k, v) {
+            if (v != undefined) {
+                var filtered_data_item = [];
+                $.each(v, function(i, f) {
+                    if (f != undefined) {
+                        var is_approved = f.approved;
+                        var is_public = f.public;
+                        var is_tweet = false;
+
+                        if (f.attribution.search('twitter.com') > -1) {
+                            is_tweet = true;
+                        }
+                        
+                        switch(page_scope) {
+                            case 'public':
+                                if (page_scope == 'public' && is_public && is_approved) {
+                                    f.date_relative = moment(f.time_string, "YYYYMMDD").fromNow();
+                                    f.page_scope = page_scope;
+                                    f.is_tweet = is_tweet;
+                                    filtered_data_item.push(f);
+                                }
+                                break;
+                            case 'internal':
+                                if (is_approved) {
+                                    f.date_relative = moment(f.time_string, "YYYYMMDD").fromNow();
+                                    f.page_scope = page_scope;
+                                    f.is_tweet = is_tweet;
+                                    filtered_data_item.push(f);
+                                }
+                                break;
+                        }
+                    }
+                });
+                if (filtered_data_item.length > 0) {
+                    filtered_data.push(filtered_data_item);
+                }
+            }
+
+            if (v == undefined || v.length == 0) {
+                data.splice(k, 1);
+            }
+        });
+        return filtered_data;
     }
     
     

@@ -1,7 +1,7 @@
-<li>
+<li class="new">
+    <h4>New: <%= date_relative %></h4>
     <div class="news-item"><%= statement %></div>
     <ul class="meta">
-        <li class="date-added"><%= date_relative %></li>
         <li class="source">
             Source: 
             <% if (is_tweet) { %>
@@ -9,7 +9,9 @@
             <% } else { %>
                 <%= attribution %>
             <% } %>
-            (via <%= reporter %>)
         </li>
-    </ul>
-</li>
+        <% if (page_scope == 'internal') { %>
+            <li class="reporter">Added by: <%= reporter %></li>
+        <% } %>
+<!--    </ul> -->
+<!-- </li> -->
